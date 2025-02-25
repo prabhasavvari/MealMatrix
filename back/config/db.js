@@ -1,32 +1,13 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
 // Connection URI
-const uri = process.env.MONGO_URI; // Replace with your MongoDB URI
-const dbName = 'zomatoDb'; // Replace with your database name
+const uri = process.env.MONGO_URI; 
 
-let client;
-let db;
+const connectdb = () => mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => console.log("Mongodb connected succesfully"))
+.catch(err => console.error("Error connecting to Mongodb:", err));
 
-async function connectToDatabase() {
-    if (db) return db; // Return the existing database connection if it exists
-
-    try {
-        client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        await client.connect();
-        db = client.db(dbName);
-        console.log('Connected to MongoDB');
-        return db;
-    } catch (error) {
-        console.error('Could not connect to MongoDB', error);
-        process.exit(1);
-    }
-}
-
-function getDb() {
-    if (!db) {
-        throw new Error('Database not connected');
-    }
-    return db;
-}
-
-module.exports = { connectToDatabase, getDb };
+module.exports = connectdb;
