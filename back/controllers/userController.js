@@ -6,7 +6,7 @@ const {authMiddleware} = require ('../middleware/authMiddleware');
 exports.getAllUsers = async(req, res) => {
   try {
     const allUsers = await User.find().lean();  //  Convert to plain JavaScript objects
-    res.json(allUsers); 
+    res.status(200).json(allUsers); 
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
@@ -58,7 +58,18 @@ exports.loginUser = async(req, res) => {
   }
 }
 
-exports.updateUser = async (req, res) => {
+exports.getUserProfile = async(req, res) => {
+  try{
+    const user = await User.findById(req.user._id);
+    if(!user) return res.status(404).json({ message: "User not found" });
+    res.status(200).json(user);
+  }
+  catch (error){
+    res.status(500).json({message: "Server error", error});
+  }
+}
+
+exports.updateUserProfile = async (req, res) => {
   try{
     const {name, email, password, phone, address} = req.body;
     const user = await User.findById(req.user._id);
@@ -87,6 +98,19 @@ exports.updateUser = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(req.user._id, { $set: updateFields }, { new: true });
 
     res.status(200).json({ message: "Profile updated successfully", updatedUser });
+  }
+  catch (error) {
+    res.status(500).json({ message: "server error", error });
+  }
+}
+
+exports.deleteUserProfile = async(req, res) => {
+  try{
+    const user = await User.findById(req.user._id);
+    if(!user) return res.status(404).json({message: "User not found"});
+
+    await user.deleteOne() //User.findByIdAndDelete(req.user._id);
+    res.status(200).json({message: "user deleted successfully"});
   }
   catch (error) {
     res.status(500).json({ message: "server error", error });
