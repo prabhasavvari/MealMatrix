@@ -7,10 +7,12 @@ let cors = require('cors');
 
 let app = express();
 connectdb();
-let port = process.env.PORT || 5500;
+let port = process.env.PORT || 7700;
 
 app.use(bodyParser.json());
 app.use(cors());
+
+app.use('/api', require('./routes/userRoutes'));
 
 app.get('/', async(req, res) => {
   try{
