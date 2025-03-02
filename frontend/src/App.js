@@ -1,9 +1,16 @@
 import React  from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+
 
 function App() {
   return (
     <div className="App">
-      <h1> Welcome to my food website</h1>
+      <div>
+        <Navbar />
+        <Hero />
+      </div>
     </div>
   );
 }

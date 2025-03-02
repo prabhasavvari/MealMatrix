@@ -1,0 +1,26 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  background-color: transparent;
+  transition: background-color 0.3s ease-in-out; /* Smooth transition */
+  z-index: 1000;
+}
+
+.navbar .nav-link {
+  color: white;
+}
+.navbar .nav-link:hover {
+  color: white;
+  transform: scale(1.1);
+  transition: color 0.3s ease-in-out;
+}
+
+button.navbar-toggler {
+  background-color: white;
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.8);
+}
