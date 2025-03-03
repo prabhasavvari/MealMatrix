@@ -8,14 +8,21 @@
   z-index: 1000;
 }
 
-.navbar .nav-link {
+.navbar button {
+  background: none;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.navbar .nav-item {
   color: white;
 }
-.navbar .nav-link:hover {
+.navbar .nav-item:hover {
   color: white;
   transform: scale(1.1);
   transition: color 0.3s ease-in-out;
 }
+
 
 button.navbar-toggler {
   background-color: white;

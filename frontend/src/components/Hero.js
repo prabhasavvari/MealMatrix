@@ -21,13 +21,13 @@ const Hero = () => {
         <h1>Delicious Food, Delivered Fast!</h1>
         <p>Order from the best restaurants in town</p>
         <div className="search-container">
-          <input className="location-search"
+          <input id="location" className="location-search"
             type="text"
             placeholder="Enter your location..."
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
-          <input
+          <input id="food-search"
             type="text"
             placeholder="Search for food or restaurant..."
             value={food}
